@@ -30,7 +30,7 @@ void n(void)
 struct chr get_gene(char * s)
 {
 	struct chr gene;
-	gene.seq="not";
+	gene.seq=" ";
 	char * pch;
 	pch = strtok(s,"\n");
 	int c = 0;
