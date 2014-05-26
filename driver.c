@@ -30,19 +30,19 @@ void n(void)
 struct chr get_gene(char * s)
 {
 	struct chr gene;
+	gene.seq="not";
 	char * pch;
 	pch = strtok(s,"\n");
 	int c = 0;
 	while(pch !=NULL)
 	{
-		printf("%i: %s\n",c++,pch);
 		if(pch[0]=='>')
 		{
 			gene.chr_name=pch;
 			pch = strtok(NULL,"\n");
 		}
 		
-		/*
+		
 		char * seq = gene.seq;
 		gene.seq = malloc((strlen(seq) + strlen(pch)) * sizeof(char));
 		int i;
@@ -52,7 +52,7 @@ struct chr get_gene(char * s)
 			gene.seq[i]=pch[j];
 		gene.seq[i]='\0';
 		
-		*/
+		
 		pch = strtok(NULL,"\n");
 		if(strcmp(pch,">chrII")==0)
 			break;
@@ -65,9 +65,9 @@ struct chr get_gene(char * s)
 int main()
 {
 	char * w303 = read_file();
-	struct chr test = get_gene(w303);
+	//struct chr test = get_gene(w303);
 	
-	/*
+	
 	printf("%lu\n",strlen(w303));
 	
 	struct chr test[10];
@@ -88,5 +88,9 @@ int main()
 		test[0].seq[i]=seq1[j];
 	test[0].seq[i]='\0';
 	}
-	*/
+	n();n();
+	
+	
+	
+	
 }
