@@ -230,11 +230,10 @@ void write_fasta(char * filename, struct chr * genome)
 	    exit(1);
 	}
 	
-	//printf("%s\n",genome[8].chr_name);
 	for (int i=0;i<17;i++)
 	{
-		//fprintf(f,">%s\n",genome[i].chr_name);
-		//fprintf(f,"%s\n",genome[i].seq);
+		fprintf(f,">%s\n",genome[i].chr_name);
+		fprintf(f,"%s\n",genome[i].seq);
 	}
 
 	fclose(f);
