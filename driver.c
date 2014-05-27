@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+//#include "fasta.c"
 
 struct chr
 {
@@ -27,42 +28,58 @@ void n(void)
 	printf("\n");
 }
 
-struct chr get_gene(char * s)
+char * help_get_gene(char * s)
 {
-	struct chr gene;
-	gene.seq=" ";
+	char * r = malloc((strlen(s)-1) * sizeof(char));
+	for (int i=0;i<strlen(r);i++)
+	{
+		r[i]=s[i+1];
+	}
+	
+	return r;
+}
+
+void get_gene(char * s)
+{
+	struct chr gene[16];
+	
 	char * pch;
 	pch = strtok(s,"\n");
-	int c = 0;
+	int c = -1;
 	while(pch !=NULL)
 	{
 		if(pch[0]=='>')
 		{
-			gene.chr_name=pch;
+			printf("%s\n",pch);
+			c++;
+			gene[c].chr_name=help_get_gene(pch);
 			pch = strtok(NULL,"\n");
+			gene[c].seq=" ";
 		}
 		
 		
-		char * seq = gene.seq;
-		gene.seq = malloc((strlen(seq) + strlen(pch)) * sizeof(char));
-		strcpy(gene.seq,seq);
-		strncat(gene.seq,pch,strlen(pch));
-		
-		
+		char * seq = gene[c].seq;
+		gene[c].seq = malloc((strlen(seq) + strlen(pch)) * sizeof(char));
+		strcpy(gene[c].seq,seq);
+		strncat(gene[c].seq,pch,strlen(pch));
+				
 		pch = strtok(NULL,"\n");
-		if(strcmp(pch,">chrII")==0)
-			break;
 	}
+	printf("%s\n",gene[0].chr_name);
 
-	return gene;
 }
 
 
 int main()
 {
 	char * w303 = read_file();
-	struct chr test = get_gene(w303);
-	printf("Name: %s\nSequence: %s\n",test.chr_name,test.seq);
+	get_gene(w303);
+	
+	
+	//printf("Name: %s\nSequence: %s\n",test.chr_name,test.seq);
+	
+	
+	
 	
 
 }
