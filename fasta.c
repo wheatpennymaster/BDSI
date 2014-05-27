@@ -171,25 +171,7 @@ CloseFASTA(FASTAFILE *ffp)
 }
 
 
-void get_fasta(char * filename)
-{
-  FASTAFILE *ffp;
-  char *seq;
-  char *name;
-  int   L;
-				/* argv[1] is the name of a FASTA file*/ 
-  ffp = OpenFASTA(filename);
-  while (ReadFASTA(ffp, &seq, &name, &L))
-  { 
-      printf("%s\n", name);
-      printf("%s\n",  seq);
 
-      free(seq);
-      free(name);
-  }
-  CloseFASTA(ffp);
-  
-}
 
 /* what follows is a useful idiom: when you're writing a .c file that's supposed
  * to be a module of library functions, include one or more "test drivers".
@@ -204,29 +186,43 @@ void get_fasta(char * filename)
  * the full power of the API.
  */
 
-//#ifdef TEST_FASTA_STUFF
 /* Test the fasta parsing API.
  *  to compile:  gcc -o test -DTEST_FASTA_STUFF -Wall -g fasta.c 
  *  to run:      ./test myseqs.fa 
  */
-/*
+
+struct chr
+{
+	char * chr_name;
+	char * seq;
+};
+
 int main(int argc, char **argv)
 {
-  FASTAFILE *ffp;
-  char *seq;
-  char *name;
-  int   L;
-				argv[1] is the name of a FASTA file 
-  ffp = OpenFASTA(argv[1]);
-  while (ReadFASTA(ffp, &seq, &name, &L))
-  { 
-      printf(">%s\n", name);
-      printf("%s\n",  seq);
+	FASTAFILE *ffp;
+	char *seq;
+	char *name;
+	int L;
+				/* argv[1] is the name of a FASTA file */
+	ffp = OpenFASTA(argv[1]);
 
-      free(seq);
-      free(name);
-  }
-  CloseFASTA(ffp);
+	struct chr genome[20];
+	int c=0;
 
-  exit(0);
-}*/
+ 	while (ReadFASTA(ffp, &seq, &name, &L))
+    {
+		//printf(">%s\n", name);
+		//printf("%s\n",  seq);
+
+		genome[c].chr_name=name;
+		genome[c].seq=seq;
+		//printf("%s\n",genome[c].chr_name);
+		c++;
+
+		//free(seq);
+		//free(name);
+    }
+
+	CloseFASTA(ffp);
+	exit(0);
+}
