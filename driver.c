@@ -70,6 +70,11 @@ int main()
 {
 	struct chr * test;
 	test = read_fasta("w303.fasta");
+	printf("%s\n",test[0].chr_name);
+	printf("%s\n",test[0].chr_name);
+	printf("%s\n",test[17].chr_name);
+	
+	//write_fasta("w303_write.fasta",test);
 
 	
 	

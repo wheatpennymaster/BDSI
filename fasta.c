@@ -170,26 +170,18 @@ CloseFASTA(FASTAFILE *ffp)
   free(ffp);
 }
 
-
-
-
-/* what follows is a useful idiom: when you're writing a .c file that's supposed
- * to be a module of library functions, include one or more "test drivers".
- * These are small main()'s, normally ifdef'ed out of the code, that
- * enable the .c file to be compiled into one or more standalone test programs.
- * This lets you test your module in relative isolation, which tends
- * to lead to faster debugging and more robust code. It also
- * provides a convenient way to document a working minimal API: for example,
- * the main() here is a minimal FASTA reader. And it also tends to
- * have a useful psychological effect on you: it tends to encourage you
- * to simplify your APIs, so that small test programs can demonstrate
- * the full power of the API.
- */
-
 /* Test the fasta parsing API.
  *  to compile:  gcc -o test -DTEST_FASTA_STUFF -Wall -g fasta.c 
  *  to run:      ./test myseqs.fa 
  */
+
+
+
+
+
+
+
+
 
 struct chr
 {
@@ -206,7 +198,7 @@ struct chr * read_fasta(char * filename)
 				/* argv[1] is the name of a FASTA file */
 	ffp = OpenFASTA(filename);
 
-	struct chr genome[17];
+	static struct chr genome[17];
 	int c=0;
 
  	while (ReadFASTA(ffp, &seq, &name, &L))
@@ -225,5 +217,27 @@ struct chr * read_fasta(char * filename)
 
 	CloseFASTA(ffp);
 	//exit(0);
+	
 	return genome;
 }
+
+void write_fasta(char * filename, struct chr * genome)
+{
+	FILE *f = fopen(filename, "w");
+	if (f == NULL)
+	{
+	    printf("Error opening file!\n");
+	    exit(1);
+	}
+	
+	//printf("%s\n",genome[8].chr_name);
+	for (int i=0;i<17;i++)
+	{
+		//fprintf(f,">%s\n",genome[i].chr_name);
+		//fprintf(f,"%s\n",genome[i].seq);
+	}
+
+	fclose(f);
+}
+
+
