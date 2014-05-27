@@ -197,16 +197,16 @@ struct chr
 	char * seq;
 };
 
-int main(int argc, char **argv)
+struct chr * maine(char * filename)
 {
 	FASTAFILE *ffp;
 	char *seq;
 	char *name;
 	int L;
 				/* argv[1] is the name of a FASTA file */
-	ffp = OpenFASTA(argv[1]);
+	ffp = OpenFASTA(filename);
 
-	struct chr genome[20];
+	struct chr genome[17];
 	int c=0;
 
  	while (ReadFASTA(ffp, &seq, &name, &L))
@@ -224,5 +224,6 @@ int main(int argc, char **argv)
     }
 
 	CloseFASTA(ffp);
-	exit(0);
+	//exit(0);
+	return genome;
 }

@@ -1,13 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//#include "fasta.c"
-
-struct chr
-{
-	char * chr_name;
-	char * seq;
-};
+#include "fasta.c"
 
 char * read_file(void)
 {
@@ -28,6 +22,8 @@ void n(void)
 	printf("\n");
 }
 
+
+/*
 char * help_get_gene(char * s)
 {
 	char * r = malloc((strlen(s)-1) * sizeof(char));
@@ -68,15 +64,14 @@ void get_gene(char * s)
 	printf("%s\n",gene[0].chr_name);
 
 }
-
+*/
 
 int main()
 {
-	char * w303 = read_file();
-	get_gene(w303);
+	struct chr * test;
+	test = maine("w303.fasta");
+
 	
-	
-	//printf("Name: %s\nSequence: %s\n",test.chr_name,test.seq);
 	
 	
 	
