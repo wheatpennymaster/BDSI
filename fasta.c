@@ -197,7 +197,7 @@ struct chr
 	char * seq;
 };
 
-struct chr * maine(char * filename)
+struct chr * read_fasta(char * filename)
 {
 	FASTAFILE *ffp;
 	char *seq;

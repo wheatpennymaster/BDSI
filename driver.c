@@ -69,7 +69,7 @@ void get_gene(char * s)
 int main()
 {
 	struct chr * test;
-	test = maine("w303.fasta");
+	test = read_fasta("w303.fasta");
 
 	
 	
