@@ -3,11 +3,24 @@
 #include <string.h>
 #include "fasta.c"
 
-char * read_file(void)
+struct gff
+{
+	char * chr;
+	char * data1;
+	char * feature;
+	int start;
+	int end;
+	char * data2;
+	char * data3;
+	char * data4;
+	char * the_rest;
+};
+
+char * read_file(char * filename)
 {
 	char * file_contents;
 	long input_file_size;
-	FILE *input_file = fopen("/Users/thomas/Desktop/w303.fasta","rb");
+	FILE *input_file = fopen(filename,"rb");
 	fseek(input_file,0,SEEK_END);
 	input_file_size = ftell(input_file);
 	rewind(input_file);
@@ -15,6 +28,55 @@ char * read_file(void)
 	fread(file_contents,sizeof(char),input_file_size,input_file);
 	fclose(input_file);
 	return file_contents;
+}
+
+unsigned long get_lines(char * filename)
+{
+	FILE *fp = fopen(filename,"r");
+	int c;
+	unsigned long line_count = 0;
+
+	/* count the newline characters */
+	while ((c=fgetc(fp)) != EOF)
+	{
+		if (c == '\n')
+			line_count++;
+	}
+	fclose(fp);
+	return line_count;
+}
+
+void read_gff(char * filename, struct gff * gff_lines)
+{
+	char * s = read_file(filename);
+	char * newline_split;
+	char * tab_split;
+	char *saveptr1, *saveptr2;
+	char *temp[9];		
+	
+	newline_split = strtok_r(s,"\n",&saveptr1);
+	for(int j=0;newline_split !=NULL;j++)
+	{
+		tab_split = strtok_r(newline_split,"	",&saveptr2);
+		for(int i=0;tab_split !=NULL;i++)
+		{
+			temp[i]=tab_split;
+			tab_split = strtok_r(NULL,"	",&saveptr2);
+		}
+
+		gff_lines[j].chr=temp[0];
+		gff_lines[j].data1=temp[1];
+		gff_lines[j].feature=temp[2];
+		gff_lines[j].start=atoi(temp[3]);
+		gff_lines[j].end=atoi(temp[4]);
+		gff_lines[j].data2=temp[5];
+		gff_lines[j].data3=temp[6];
+		gff_lines[j].data3=temp[7];
+		gff_lines[j].the_rest=temp[8];
+
+		newline_split = strtok_r(NULL,"\n",&saveptr1);
+
+	}
 }
 
 void n(void)
@@ -66,17 +128,17 @@ void get_gene(char * s)
 }
 */
 
+
+
 int main()
 {
-	struct chr * test;
-	test = read_fasta("w303.fasta");
+	struct chr * test_fasta;
+	test_fasta = read_fasta("w303.fasta"); //works
+	write_fasta("w303_write.fasta",test_fasta); //works
+	
+	
+	struct gff test_gff[get_lines("W303_RM.gff")];
+	read_gff("W303_RM.gff",test_gff); //works
 
-	write_fasta("w303_write.fasta",test);
-
 	
-	
-	
-	
-	
-
 }
