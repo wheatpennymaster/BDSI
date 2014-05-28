@@ -2,19 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "fasta.c"
-
-struct gff
-{
-	char * chr;
-	char * data1;
-	char * feature;
-	int start;
-	int end;
-	char * data2;
-	char * data3;
-	char * data4;
-	char * the_rest;
-};
+#include "gff.c"
 
 char * read_file(char * filename)
 {
@@ -44,38 +32,6 @@ unsigned long get_lines(char * filename)
 	}
 	fclose(fp);
 	return line_count;
-}
-
-void read_gff(char * filename, struct gff * gff_lines)
-{
-	char * s = read_file(filename);
-	char * newline_split;
-	char * tab_split;
-	char *saveptr1, *saveptr2;
-	char *temp[9];		
-	
-	newline_split = strtok_r(s,"\n",&saveptr1);
-	for(int j=0;newline_split !=NULL;j++)
-	{
-		tab_split = strtok_r(newline_split,"	",&saveptr2);
-		for(int i=0;tab_split !=NULL;i++)
-		{
-			temp[i]=tab_split;
-			tab_split = strtok_r(NULL,"	",&saveptr2);
-		}
-
-		gff_lines[j].chr=temp[0];
-		gff_lines[j].data1=temp[1];
-		gff_lines[j].feature=temp[2];
-		gff_lines[j].start=atoi(temp[3]);
-		gff_lines[j].end=atoi(temp[4]);
-		gff_lines[j].data2=temp[5];
-		gff_lines[j].data3=temp[6];
-		gff_lines[j].data4=temp[7];
-		gff_lines[j].the_rest=temp[8];
-
-		newline_split = strtok_r(NULL,"\n",&saveptr1);
-	}
 }
 
 void n(void)
