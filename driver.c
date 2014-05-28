@@ -3,6 +3,7 @@
 #include <string.h>
 #include "fasta.c"
 #include "gff.c"
+#include "vcf.c"
 
 char * read_file(char * filename)
 {
@@ -95,6 +96,23 @@ int main()
 	struct gff test_gff[get_lines("W303_RM.gff")];
 	read_gff("W303_RM.gff",test_gff); //works
 	write_gff("W303_RM_write.gff",test_gff,sizeof(test_gff));
+	
+	struct vcf test_vcf[get_lines("example_vcf.vcf")];
+	read_vcf("example_vcf.vcf",test_vcf);
+	for(int i=0;i<4775;i++)
+	{
+		printf("%s	%i	%s	%s	%s	%s	%s	%s	%s	%s\n",
+		test_vcf[i].chr,
+		test_vcf[i].pos,
+		test_vcf[i].ID,
+		test_vcf[i].ref,
+		test_vcf[i].alt,
+		test_vcf[i].qual,
+		test_vcf[i].filter,
+		test_vcf[i].n1,
+		test_vcf[i].n2,
+		test_vcf[i].n3);
+	}
 	
 	/*
 	for(int i=0;i<16665;i++)
