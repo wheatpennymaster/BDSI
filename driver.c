@@ -94,7 +94,7 @@ int main()
 	
 	struct gff test_gff[get_lines("W303_RM.gff")];
 	read_gff("W303_RM.gff",test_gff); //works
-	stest_gff("W303_RM_write.gff",test_gff,sizeof(test_gff));
+	write_gff("W303_RM_write.gff",test_gff,sizeof(test_gff));
 	
 	/*
 	for(int i=0;i<16665;i++)

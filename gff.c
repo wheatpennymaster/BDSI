@@ -62,7 +62,7 @@ void read_gff(char * filename, struct gff * gff_lines)
 	}
 }
 
-void stest_gff(char * filename, struct gff * test_gff, unsigned long size)
+void write_gff(char * filename, struct gff * test_gff, unsigned long size)
 {
 	FILE *f = fopen(filename, "w");
 	if (f == NULL)
