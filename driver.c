@@ -71,11 +71,10 @@ void read_gff(char * filename, struct gff * gff_lines)
 		gff_lines[j].end=atoi(temp[4]);
 		gff_lines[j].data2=temp[5];
 		gff_lines[j].data3=temp[6];
-		gff_lines[j].data3=temp[7];
+		gff_lines[j].data4=temp[7];
 		gff_lines[j].the_rest=temp[8];
 
 		newline_split = strtok_r(NULL,"\n",&saveptr1);
-
 	}
 }
 
@@ -138,7 +137,20 @@ int main()
 	
 	
 	struct gff test_gff[get_lines("W303_RM.gff")];
+	printf("%lu\n",get_lines("W303_RM.gff"));
 	read_gff("W303_RM.gff",test_gff); //works
-
 	
+	for(int i=0;i<16665;i++)
+	{
+		printf("%s %s %s %i %i %s %s %s %s\n",
+			test_gff[i].chr,
+			test_gff[i].data1,
+			test_gff[i].feature,
+			test_gff[i].start,
+			test_gff[i].end,
+			test_gff[i].data2,
+			test_gff[i].data3,
+			test_gff[i].data4,
+			test_gff[i].the_rest);
+	}
 }
