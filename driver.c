@@ -93,9 +93,10 @@ int main()
 	
 	
 	struct gff test_gff[get_lines("W303_RM.gff")];
-	printf("%lu\n",get_lines("W303_RM.gff"));
 	read_gff("W303_RM.gff",test_gff); //works
+	stest_gff("W303_RM_write.gff",test_gff,sizeof(test_gff));
 	
+	/*
 	for(int i=0;i<16665;i++)
 	{
 		printf("%s %s %s %i %i %s %s %s %s\n",
@@ -108,5 +109,5 @@ int main()
 			test_gff[i].data3,
 			test_gff[i].data4,
 			test_gff[i].the_rest);
-	}
+	}*/
 }

@@ -61,3 +61,29 @@ void read_gff(char * filename, struct gff * gff_lines)
 		newline_split = strtok_r(NULL,"\n",&saveptr1);
 	}
 }
+
+void stest_gff(char * filename, struct gff * test_gff, unsigned long size)
+{
+	FILE *f = fopen(filename, "w");
+	if (f == NULL)
+	{
+	    printf("Error opening file!\n");
+	    exit(1);
+	}
+	
+	int n = size/(sizeof(struct gff));
+	for(int i=0;i<n;i++)
+	{
+		fprintf(f,"%s	%s	%s	%i	%i	%s	%s	%s	%s\n",
+			test_gff[i].chr,
+			test_gff[i].data1,
+			test_gff[i].feature,
+			test_gff[i].start,
+			test_gff[i].end,
+			test_gff[i].data2,
+			test_gff[i].data3,
+			test_gff[i].data4,
+			test_gff[i].the_rest);
+	}
+
+}
