@@ -41,13 +41,17 @@ void read_vcf (char * filename, struct vcf * vcf_lines)
 	
 	newline_split = strtok_r(s,"\n",&saveptr1);
 	char metadata_skip = newline_split[0];
+	
+	int m=0;
 	while(metadata_skip==35) //# is 35 in decimal
 	{
+		vcf_lines[m].chr=newline_split;
 		newline_split = strtok_r(NULL,"\n",&saveptr1);
 		metadata_skip = newline_split[0];
+		m++;
 	}
 	
-	for(int j=0;newline_split !=NULL;j++)
+	for(int j=m;newline_split !=NULL;j++)
 	{
 		tab_split = strtok_r(newline_split,"	",&saveptr2);
 		for(int i=0;tab_split !=NULL;i++)
@@ -68,4 +72,30 @@ void read_vcf (char * filename, struct vcf * vcf_lines)
 		
 		newline_split = strtok_r(NULL,"\n",&saveptr1);
 	}
+}
+
+void write_vcf(char * filename, struct gff * test_vcf, unsigned long size)
+{
+	FILE *f = fopen(filename, "w");
+	if (f == NULL)
+	{
+	    printf("Error opening file!\n");
+	    exit(1);
+	}
+	
+	int n = size/(sizeof(struct vcf));
+	for(int i=0;i<n;i++)
+	{
+		fprintf(f,"%s	%s	%s	%i	%i	%s	%s	%s	%s\n",
+			test_vcf[i].chr,
+			test_vcf[i].data1,
+			test_vcf[i].feature,
+			test_vcf[i].start,
+			test_vcf[i].end,
+			test_vcf[i].data2,
+			test_vcf[i].data3,
+			test_vcf[i].data4,
+			test_vcf[i].the_rest);
+	}
+
 }

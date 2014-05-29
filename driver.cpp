@@ -43,14 +43,17 @@ void n(void)
 int main()
 {	
 	struct chr * test_fasta;
-	test_fasta = read_fasta("w303.fasta"); //works
-	write_fasta("w303_write.fasta",test_fasta); //works
+	test_fasta = read_fasta("w303.fasta");
+	write_fasta("w303_write.fasta",test_fasta);
 	
 	
 	struct gff test_gff[get_lines("W303_RM.gff")];
-	read_gff("W303_RM.gff",test_gff); //works
+	read_gff("W303_RM.gff",test_gff);
 	write_gff("W303_RM_write.gff",test_gff,sizeof(test_gff));
 	
 	struct vcf test_vcf[get_lines("example_vcf.vcf")];
 	read_vcf("example_vcf.vcf",test_vcf);
+	//printf("%lu\n",get_lines("example_vcf.vcf"));
+	printf("%s\n",test_vcf[4826].chr);
+	//write_vcf("vcf_write.vcf",test_vcf,sizeof(test_vcf));
 }
