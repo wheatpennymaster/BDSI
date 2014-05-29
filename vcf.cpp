@@ -74,7 +74,7 @@ void read_vcf (char * filename, struct vcf * vcf_lines)
 	}
 }
 
-void write_vcf(char * filename, struct gff * test_vcf, unsigned long size)
+void write_vcf(char * filename, struct vcf * test_vcf, unsigned long size)
 {
 	FILE *f = fopen(filename, "w");
 	if (f == NULL)
@@ -84,18 +84,27 @@ void write_vcf(char * filename, struct gff * test_vcf, unsigned long size)
 	}
 	
 	int n = size/(sizeof(struct vcf));
-	for(int i=0;i<n;i++)
+	int m = 0;
+	char metadata_write = test_vcf[0].chr[0];
+	while(metadata_write==35)
 	{
-		fprintf(f,"%s	%s	%s	%i	%i	%s	%s	%s	%s\n",
+		fprintf(f,"%s\n",test_vcf[m].chr);
+		m++;
+		metadata_write = test_vcf[m].chr[0];
+	}
+	for(int i=m;i<n;i++)
+	{
+		fprintf(f,"%s	%i	%s	%s	%s	%s	%s	%s	%s	%s	\n",
 			test_vcf[i].chr,
-			test_vcf[i].data1,
-			test_vcf[i].feature,
-			test_vcf[i].start,
-			test_vcf[i].end,
-			test_vcf[i].data2,
-			test_vcf[i].data3,
-			test_vcf[i].data4,
-			test_vcf[i].the_rest);
+			test_vcf[i].pos,
+			test_vcf[i].ID,
+			test_vcf[i].ref,
+			test_vcf[i].alt,
+			test_vcf[i].qual,
+			test_vcf[i].filter,
+			test_vcf[i].n1,
+			test_vcf[i].n2,
+			test_vcf[i].n3);
 	}
 
 }

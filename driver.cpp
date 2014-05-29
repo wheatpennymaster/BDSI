@@ -53,7 +53,5 @@ int main()
 	
 	struct vcf test_vcf[get_lines("example_vcf.vcf")];
 	read_vcf("example_vcf.vcf",test_vcf);
-	//printf("%lu\n",get_lines("example_vcf.vcf"));
-	printf("%s\n",test_vcf[4826].chr);
-	//write_vcf("vcf_write.vcf",test_vcf,sizeof(test_vcf));
+	write_vcf("vcf_write.vcf",test_vcf,sizeof(test_vcf));
 }
