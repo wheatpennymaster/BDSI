@@ -1,6 +1,5 @@
 package drawing;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -45,16 +44,19 @@ public class DrawStuff extends JComponent
 		{
 			graph2.drawString(Integer.toString((int)gen[i]), (int)gen[i], 290);
 		}
-		d.doEverthing2_0();
+		d.doEverthing();
 		StuffToDraw[]s = d.s;
 		
-		for(int i=0;i<d.s.length;i++)
+		for(int i=0;i<4;i++)
 		{
 			if(s[i].fix)
 			{
 				//System.out.println("Here6");
 				graph2.setPaint(colors[i]);
+				graph2.draw(s[i].bottom);
+				graph2.draw(s[i].top);
 				Path2D path2D = new Path2D.Double();
+
 				path2D.append(s[i].bottom, false);
 				path2D.lineTo(1000, 276);
 				path2D.lineTo(1000, 0);
@@ -63,27 +65,20 @@ public class DrawStuff extends JComponent
 				path2D.closePath();
 				// fill constructed path		
 				graph2.fill(path2D);
-				
-				graph2.setPaint(Color.WHITE);
-				graph2.setStroke(new BasicStroke(2));
-				graph2.draw(s[i].bottom);
-				graph2.draw(s[i].top);
 			}
-			else
+			if(!s[i].fix)
 			{
 				//System.out.println("Here7");
 				graph2.setPaint(colors[i]);
+				graph2.draw(s[i].bottom);
+				graph2.draw(s[i].top);
 				Path2D path2D2 = new Path2D.Double();
+
 				path2D2.append(s[i].bottom, false);
 				path2D2.append(s[i].top, false);
 				path2D2.closePath();
 				// fill constructed path		
 				graph2.fill(path2D2);
-				
-				graph2.setPaint(Color.WHITE);
-				graph2.setStroke(new BasicStroke(2));
-				graph2.draw(s[i].bottom);
-				graph2.draw(s[i].top);
 			}
 		}
 

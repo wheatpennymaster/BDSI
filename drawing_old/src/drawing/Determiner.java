@@ -67,169 +67,11 @@ public class Determiner
 		s = new StuffToDraw[clustered_names.size()];
 		remove_noise();
 		reorder();
-		reorder();
-		reorder();
 	}
 	
 	public StuffToDraw[] getStuffToDraw()
 	{
 		return s;
-	}
-
-	public void doEverthing2_0()
-	{
-		for(int i=0;i<averaged_l.size();i++)
-		{
-			if(fixed(i))
-			{
-				if(i==0) //first iteration
-				{
-					System.out.println("Here0");
-					double x1 = get_start(i);
-					double y1 = 138;			//must find a way to determine this so that there is not an overlap
-					double x4 = get_end_fixed(i);
-					double y4 = 276;
-					double x2 = x1+(x4-x1)/2;
-					double x3 = x1+(x4-x1)/2;
-					double y2 = 138;
-					double y3 = 276;
-					CubicCurve2D cubicCurve = new CubicCurve2D.Double();	
-					cubicCurve.setCurve(x1, y1, x2, y2, x3, y3, x4, y4);
-					CubicCurve2D cubicCurve2 = new CubicCurve2D.Double();
-					cubicCurve2.setCurve(x4, 0, x3, 0, x2, y2, x1, y1);
-					s[i]=new StuffToDraw(clustered_names.get(i),cubicCurve,cubicCurve2, true);
-				}
-				else if(same_background(i,i-1))
-				{
-					if((get_start(i)-get_start(i-1))<=100)
-					{
-						System.out.println("Here1.5");
-						double x1 = get_start(i);
-						double y1 = 138;			//must find a way to determine this so that there is not an overlap
-						double x4 = get_end_fixed(i);
-						double y4 = 276;
-						double x2 = x1+(x4-x1)/2+100;
-						double x3 = x1+(x4-x1)/2;
-						double y2 = 138;
-						double y3 = 150;
-						CubicCurve2D cubicCurve = new CubicCurve2D.Double();	
-						cubicCurve.setCurve(x1, y1, x2, y2, x3, y3, x4, y4);
-						CubicCurve2D cubicCurve2 = new CubicCurve2D.Double();
-						cubicCurve2.setCurve(x4, 0, x3, 0, x2, y2, x1, y1);
-						s[i]=new StuffToDraw(clustered_names.get(i),cubicCurve,cubicCurve2 ,true);
-					}
-					else
-					{
-						System.out.println("Here1");
-						double x1 = get_start(i);
-						double y1 = 138;			//must find a way to determine this so that there is not an overlap
-						double x4 = get_end_fixed(i);
-						double y4 = 276;
-						double x2 = x1+(x4-x1)/2;
-						double x3 = x1+(x4-x1)/2;
-						double y2 = 138;
-						double y3 = 276;
-						CubicCurve2D cubicCurve = new CubicCurve2D.Double();	
-						cubicCurve.setCurve(x1, y1, x2, y2, x3, y3, x4, y4);
-						CubicCurve2D cubicCurve2 = new CubicCurve2D.Double();
-						cubicCurve2.setCurve(x4, 0, x3, 0, x2, y2, x1, y1);
-						s[i]=new StuffToDraw(clustered_names.get(i),cubicCurve,cubicCurve2 ,true);
-					}
-				}
-				else //not same background
-				{
-					System.out.println("Here2");
-					double x1 = get_start(i);
-					double y1 = 138;			//must find a way to determine this so that there is not an overlap
-					double x4 = get_end_fixed(i);
-					double y4 = 276;
-					double x2 = x1+(x4-x1)/2;
-					double x3 = x1+(x4-x1)/2;
-					double y2 = 138;
-					double y3 = 276;
-					CubicCurve2D cubicCurve = new CubicCurve2D.Double();	
-					cubicCurve.setCurve(x1, y1, x2, y2, x3, y3, x4, y4);
-					CubicCurve2D cubicCurve2 = new CubicCurve2D.Double();
-					cubicCurve2.setCurve(x4, 0, x3, 0, x2, y2, x1, y1);
-					s[i]=new StuffToDraw(clustered_names.get(i),cubicCurve,cubicCurve2, true);
-				}
-			}
-
-			else //not fixed
-			{
-				if(i==0) //first iteration
-				{
-					System.out.println("Here3");
-					double x1 = get_start(i);
-					double y1 = 138;			//must find a way to determine this so that there is not an overlap
-					double x4 = get_end_notfixed(i);
-					double y4 = 276;
-					double x2 = x1+(x4-x1)/2;
-					double x3 = x1+(x4-x1)/2;
-					double y2 = 138;
-					double y3 = 276;
-					CubicCurve2D cubicCurve = new CubicCurve2D.Double();	
-					cubicCurve.setCurve(x1, y1, x2, y3, x3, y3, x4, y4);
-					CubicCurve2D cubicCurve2 = new CubicCurve2D.Double();
-					cubicCurve2.setCurve(x4, y4, x3, y2, x2, y2, x1, y1);
-					s[i]=new StuffToDraw(clustered_names.get(i),cubicCurve,cubicCurve2, false);
-				}
-				else if(same_background(i,i-1))
-				{
-					if(i%2==1)
-					{
-						System.out.println("Here4");
-						double x1 = get_start(i);
-						double y1 = 138;			//must find a way to determine this so that there is not an overlap
-						double x4 = get_end_notfixed(i);
-						double y4 = 276;
-						double x2 = x1+(x4-x1)/2;
-						double x3 = x1+(x4-x1)/2;
-						double y2 = 138;
-						double y3 = 276;
-						CubicCurve2D cubicCurve = new CubicCurve2D.Double();	
-						cubicCurve.setCurve(x1, y1, x2, y3, x3, y3, x4, y4);
-						CubicCurve2D cubicCurve2 = new CubicCurve2D.Double();
-						cubicCurve2.setCurve(x4, y4, x3, y2, x2, y2, x1, y1);
-						s[i]=new StuffToDraw(clustered_names.get(i),cubicCurve,cubicCurve2, false);
-					}
-					else
-					{
-						System.out.println("Here4.5");
-						double x1 = get_start(i);
-						double y1 = 138;			//must find a way to determine this so that there is not an overlap
-						double x4 = get_end_notfixed(i);
-						double y4 = 0;
-						double x2 = x1+(x4-x1)/2;
-						double x3 = x1+(x4-x1)/2;
-						double y2 = 138;
-						double y3 = 0;
-						CubicCurve2D cubicCurve = new CubicCurve2D.Double();	
-						cubicCurve.setCurve(x1, y1, x2, y2, x3, y3, x4, y4);
-						CubicCurve2D cubicCurve2 = new CubicCurve2D.Double();
-						cubicCurve2.setCurve(x4, y4, x3, y2, x2, y2, x1, y1);
-						s[i]=new StuffToDraw(clustered_names.get(i),cubicCurve,cubicCurve2, false);
-					}
-				}
-				else //not same background
-				{
-					System.out.println("Here5");
-					double x1 = get_start(i);
-					double y1 = 138;			//must find a way to determine this so that there is not an overlap
-					double x4 = get_end_notfixed(i);
-					double y4 = 276;
-					double x2 = x1+(x4-x1)/2;
-					double x3 = x1+(x4-x1)/2;
-					double y2 = 138;
-					double y3 = 276;
-					CubicCurve2D cubicCurve = new CubicCurve2D.Double();	
-					cubicCurve.setCurve(x1, y1, x2, y3-30, x3, y3-30, x4, y4);
-					CubicCurve2D cubicCurve2 = new CubicCurve2D.Double();
-					cubicCurve2.setCurve(x4, y4, x3, y2, x2, y2, x1, y1);
-					s[i]=new StuffToDraw(clustered_names.get(i),cubicCurve,cubicCurve2, false);
-				}
-			}
-		}
 	}
 	
 	public void doEverthing()
@@ -469,33 +311,10 @@ public class Determiner
 		{
 			for(int j=0;j<averaged_l.get(i).size();j++)
 			{
-				if(averaged_l.get(i).get(j)<.05)
+				if(averaged_l.get(i).get(j)<=.025)
 					averaged_l.get(i).set(j, 0.0);
 			}
-			
-			
-			//may cause some issues
-			int j=0;
-			for(j=0;i<averaged_l.get(i).size();j++)
-			{
-				if(averaged_l.get(i).get(j)>0)	//skip the first set of zeros, before the cluster arises
-					break;
-			}
-			
-			for(;j<averaged_l.get(i).size();j++)
-			{
-				if(averaged_l.get(i).get(j)==0)	//find the first frequency of zero
-				{
-					break;
-				}
-			}
-			for(;j<averaged_l.get(i).size();j++)
-			{
-				averaged_l.get(i).set(j, 0.0);
-			}
 		}
-		
-		
 	}
 	
 	public boolean same_background(int a, int b)
@@ -525,110 +344,75 @@ public class Determiner
 			if( ((averaged_l.get(a).get(i-1)>averaged_l.get(b).get(i-1)) && (averaged_l.get(a).get(i)<averaged_l.get(b).get(i))) || 
 					((averaged_l.get(a).get(i-1)<averaged_l.get(b).get(i-1)) && (averaged_l.get(a).get(i)>averaged_l.get(b).get(i))) )
 			{
-				if(i==averaged_l.get(a).size()-1) //end behavior like in the case of BYS2-C06
-				{
-					r=true;
-					break;	
-				}
-				if( ((averaged_l.get(a).get(i)>averaged_l.get(b).get(i)) && (averaged_l.get(a).get(i+1)<averaged_l.get(b).get(i+1))) || 
-					((averaged_l.get(a).get(i)<averaged_l.get(b).get(i)) && (averaged_l.get(a).get(i+1)>averaged_l.get(b).get(i+1))) ) //accounts for situation like BYS1-A04
-				{																														//where only one point crosses
-					break;
-				}
-				else
-				{
 					r=true;
 					break;
-				}
 			}
 		}
 		return r;
 	}
 
-	public boolean fixed(int a) //goes through the cluster at position "int a" and determines if the frequency is greater than 95% for at least three generations
+	public boolean fixed(int a)
 	{
 		boolean r=false;
-		int c = 0;
 		for(int i=0;i<averaged_l.get(a).size();i++)
 		{
-			if(averaged_l.get(a).get(i)>.95)
+			if(averaged_l.get(a).get(i)>.94)
 			{
-				c++;
+				r = true;
+				break;
 			}
 		}
-		if(c==3)
-			r=true;
-		if(averaged_l.get(a).get(averaged_l.get(a).size()-1)>.90) //takes care of end behavior (if something fixes at the last generation)
-			r=true;
 		return r;
 	}
 	
-	public double get_start(int a) //returns the generations at which the cluster beings to arise
-	{							   //highly dependent on the behavior of remove_noise()
+	public double get_start(int a)
+	{
 		double r=0;
 		for(int i=0;i<averaged_l.get(a).size();i++)
 		{
 			if(averaged_l.get(a).get(i)>0)
 			{
-				if(i==0)
-					r=generations[0];
-				else
-					r=generations[i-1];
+				r=generations[i];
 				break;
 			}
 		}
 		return r;
 	}
 	
-	public double get_end_fixed(int a) //returns the generation at which a fixed cluster fixes
+	public double get_end_fixed(int a)
 	{
 		double r=0;
 		for(int i=0;i<averaged_l.get(a).size();i++)
 		{
-			if(averaged_l.get(a).get(i)>.95)
+			if(averaged_l.get(a).get(i)>.94)
 			{
 				r = generations[i];
 				break;
 			}
 		}
-		if(r==0) //if no frequency greater than .95 is found, the last generation is assumed to be point of fixation
-			r = generations[generations.length-1];
 		return r;
 	}
 	
-	public double get_end_notfixed(int a) //returns the generation at which a cluster falls out
+	public double get_end_notfixed(int a)
 	{
 		double r = 0;
 		int i=0;
 		for(i=0;i<averaged_l.get(a).size();i++)
 		{
-			if(averaged_l.get(a).get(i)>0)	//skip the first set of zeros, before the cluster arises
+			if(averaged_l.get(a).get(i)>0)
 				break;
 		}
 		
 		for(;i<averaged_l.get(a).size();i++)
 		{
-			if(averaged_l.get(a).get(i)==0)	//find the first frequency of zero
+			if(averaged_l.get(a).get(i)==0)
 			{
 				r = generations[i];
 				break;
 			}
 		}
-		if(r==0)	//the case in which a cluster hasn't fixed, but still has fallen out; tries to predict based on trajectory of last two frequencies
-		{
-			
-			double m = (averaged_l.get(a).get(averaged_l.get(a).size()-1)-averaged_l.get(a).get(averaged_l.get(a).size()-2))/
-														(generations[generations.length-1]-generations[generations.length-2]); //slope
-			double b = averaged_l.get(a).get(averaged_l.get(a).size()-1)-(m*generations[generations.length-1]); //y-intercept
-			if(m>0)
-				r=(1-b)/m;
-			if(m<0)
-				r=-b/m;
-		}
-		if(r>1200)
-		{
-			r=1400;
-		}
+		if(r==0)
+			r=1075;
 		return r;
 	}
 	
@@ -643,38 +427,6 @@ public class Determiner
 				r = averaged_l.get(a).get(i);
 			}
 		}
-		return r;
-	}
-	
-	public boolean two_populations()
-	{
-		boolean r = false;
-		
-		for(int i=0;i<averaged_l.size();i++)
-		{
-			for(int j=i+1;j<averaged_l.size();j++)
-			{
-				Vector<Double> v = new Vector<Double>();
-				v.setSize(averaged_l.get(0).size());
-				int c=0;
-				for(int k=0;k<averaged_l.get(0).size();k++)
-				{
-					v.set(k, averaged_l.get(i).get(k)+averaged_l.get(j).get(k));
-					if((v.get(k)>.95) && (v.get(k)<1.05))
-					{
-						if(!(averaged_l.get(i).get(k)>.90) || !(averaged_l.get(j).get(k)>.90))
-						{
-							if(!anti_correlated(i,j))
-								c++;
-						}
-					}
-				}
-				if(c>4)
-					return true;
-			}
-		}
-		
-		
 		return r;
 	}
 }

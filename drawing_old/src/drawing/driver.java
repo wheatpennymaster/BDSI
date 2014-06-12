@@ -337,32 +337,28 @@ public class driver
 	
 	public static void main(String[] args) throws IOException
 	{
-		String[]aa = {"BYS2-D06","RMS1-H08","BYS1-D07","BYS1-A04"};
-		int []a = {3			,3			,4			,4};
-		for(int i=0;i<aa.length;i++)
-		{
-			Mutation2[] input = read_mutations("data.txt");
-			String pop = aa[i];
-			//print_mutations(input);
-			determine_sig(input, .2, 3);
-			determine_sig(input, .5, 1);
-			double[]generations = get_gen(input);
-			String[]genes = get_genes(input,pop);
-			double[][]freq = get_freq(input,pop);
-			//print_specific(generations, genes, freq);
-			
-			Hierarchical_c k = new Hierarchical_c(a[i], freq, genes);
-			k.clusterdata(0,false);
-			
-			
-			Determiner d = new Determiner(k.names, k.clusters, k.l, generations);
-			k.print();
-			d.print();
-			
-			System.out.println(d.two_populations());
-			System.out.println("\n");
-		}	
-		//new Erol(d, generations);
+		
+		Mutation2[] input = read_mutations("data.txt");
+		String pop = "BYS2-D06";
+		//print_mutations(input);
+		determine_sig(input, .5, 2);
+		double[]generations = get_gen(input);
+		String[]genes = get_genes(input,pop);
+		double[][]freq = get_freq(input,pop);
+		//print_specific(generations, genes, freq);
+		
+		Hierarchical_c k = new Hierarchical_c(3, freq, genes);
+		k.clusterdata(0,false);
+		
+		
+		Determiner d = new Determiner(k.names, k.clusters, k.l, generations);
+		k.print();
+		d.print();
+		d.doEverthing();
+		
+		
+		
+		new Erol(d, generations);
 		
 	}
 }
