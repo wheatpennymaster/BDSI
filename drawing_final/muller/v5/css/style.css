@@ -1,0 +1,38 @@
+body
+{
+margin-left:20px;
+}
+
+.tabit
+{
+margin-left:20px;
+}
+
+#population
+{
+width:100px;
+}
+
+.box
+{
+width:40px;
+
+}
+#file_top
+{
+margin-top:5px;
+}
+.error
+{
+	color:#ff0000;
+}
+a
+{
+	color:#CC0000;
+}
+#download_link
+{
+	font-size:16pt;
+	color:#CC0000;
+	text-decoration:underline;
+}

@@ -1,0 +1,14 @@
+#contain_me
+{
+	margin-right:40px;
+	margin-left:40px;
+}
+#top_back
+{
+	background-color:#BAFFBA;
+}
+.right
+{
+	position: absolute;
+	right:40px;
+}
